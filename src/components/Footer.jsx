@@ -1,1 +1,0 @@
-export default function Footer(){return <footer className="site-footer"><div className="container footer-inner"><div><div className="footer-brand">বাজার দর</div><div className="muted">বাজার দর — প্রয়োজনীয় পণ্যের দাম এক নজরে।</div></div><div className="muted">সকল দাম সম্ভাব্য; বাজার অবস্থার ওপর নির্ভর করে পরিবর্তিত হয়।</div></div></footer>}
