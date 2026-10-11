@@ -1,0 +1,2 @@
+import Link from 'next/link';
+export default function NotFound(){return <div className="container page-wrap"><div className="empty-state" style={{maxWidth:600,margin:'35px auto'}}><div className="empty-icon">🧭</div><h1 className="page-heading">৪০৪ — পেজটি খুঁজে পাওয়া যায়নি</h1><p className="muted" style={{marginBottom:22}}>দুঃখিত, আপনি যে পেজটি খুঁজছেন সেটি নেই অথবা সরিয়ে ফেলা হয়েছে।</p><Link href="/" className="btn btn-primary">হোম পেজে ফিরে যান</Link></div></div>}

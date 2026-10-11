@@ -1,0 +1,2 @@
+import ProductCard from './ProductCard';
+export default function ProductGrid({products}){if(!products.length)return <div className="empty-state"><div className="empty-icon">🧺</div><h3>এখনো কোনো পণ্য পাওয়া যায়নি</h3><p className="muted">কিছুক্ষণ পর আবার চেষ্টা করুন।</p></div>;return <div className="product-grid">{products.map((p,i)=><ProductCard key={String(p.id??p.slug??i)} product={p}/>)}</div>}
