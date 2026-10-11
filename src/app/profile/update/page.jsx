@@ -1,0 +1,9 @@
+/* eslint react-hooks/set-state-in-effect: off */
+'use client';
+import Link from 'next/link';
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { authClient } from '@/lib/auth-client';
+import toast from '@/lib/toast';
+export default function UpdateProfilePage(){const {data:session,isPending}=authClient.useSession();const router=useRouter();const [name,setName]=useState('');const [busy,setBusy]=useState(false);
+useEffect(()=>{if(session?.user?.name){setName(session.user.name);}if(!isPending&&!session){toast.error('তথ্য আপডেট করতে আগে সাইন ইন করুন');router.replace('/signin?redirect=/profile/update')}},[session,isPending,router]);async function submit(e){e.preventDefault();if(!name.trim()){toast.error('আপনার নাম লিখুন');return}setBusy(true);try{const res=await authClient.updateUser({name:name.trim()});if(res.error)throw new Error(res.error.message||'নাম আপডেট করা যায়নি');toast.success('প্রোফাইলের নাম আপডেট হয়েছে');router.push('/profile');router.refresh()}catch(e){toast.error(e?.message||'নাম আপডেট করা যায়নি')}finally{setBusy(false)}}if(isPending||!session)return <div className="container page-wrap">লোড হচ্ছে…</div>;return <div className="container page-wrap"><div className="breadcrumb"><Link href="/profile">আমার প্রোফাইল</Link> / তথ্য আপডেট</div><div className="auth-card" style={{margin:'20px auto',maxWidth:560}}><h1>তথ্য আপডেট করুন</h1><p className="muted" style={{fontSize:14}}>আপনার প্রোফাইলের নাম পরিবর্তন করুন।</p><form onSubmit={submit}><div className="field"><label htmlFor="name">নাম</label><input id="name" value={name} onChange={e=>setName(e.target.value)} required placeholder="আপনার নাম লিখুন"/></div><button className="btn btn-primary full" disabled={busy}>{busy?'আপডেট হচ্ছে…':'তথ্য আপডেট করুন'}</button></form></div></div>}
